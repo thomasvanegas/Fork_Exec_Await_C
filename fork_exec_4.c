@@ -31,7 +31,7 @@ int main()
     pid_t pid;
 
     // Almcacenamos el registro de ppid
-    pid_t parent_pid = getpid(); // PID del proceso padre principal
+    pid_t parent_pid = getppid(); // PID del proceso padre principal
     pid_t parent_pid_previous = parent_pid; // PID del proceso padre para el primer hijo
 
     // Proceso padre crea tres hijos
@@ -61,7 +61,7 @@ int main()
                 sumatoria += j;
             }
 
-            printf("Sumatoria en el proceso hijo[%d] con ID: (%d) y PPID:(%d) -> %d\n\n", i, getpid(), getppid(),sumatoria);
+            printf("Sumatoria en el proceso hijo[%d] con ID: (%d) y PPID:(%d) -> %d\n\n", i, getpid(), parent_pid,sumatoria);
 
             return 0; // Importante: terminar el proceso hijo después de completar su tarea
 
@@ -76,7 +76,7 @@ int main()
             if (i == 1)
             {
                 // Actualizando el PPID para los siguientes hijos
-                parent_pid_previous = pid;
+                parent_pid_previous = parent_pid;
             }
             
         }
